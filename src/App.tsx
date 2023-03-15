@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useAppDispatch, useAppSelector } from "./hooks/redux";
+import { actionDecrement, actionIncrement } from "./store/actions/counter";
 
 function App() {
+  const value = useAppSelector((state) => state.counter.value);
+  const value1 = useAppSelector((state) => state.counter1.value);
+
+  const dispatch = useAppDispatch();
+
+  const handleIncrement = () => {
+    dispatch(actionIncrement());
+  };
+
+  const handleDecrement = () => {
+    dispatch(actionDecrement());
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>Counter 0: {value}</div>
+      <div>Counter 1: {value1}</div>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
     </div>
   );
 }
